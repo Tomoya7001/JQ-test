@@ -26,6 +26,9 @@
         <li class="nav-list-item">
           <%= link_to "New List", new_list_path %>
         </li>
+        <li class="nav-list-item">
+          <%= link_to "チャット", chat_path %>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-list-item">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
