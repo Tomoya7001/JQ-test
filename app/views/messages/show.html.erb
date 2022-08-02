@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AmarimonoCook</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+  </head>
+  <body class="color-devise">
+    <header>
+      <div class="menu">
+        <nav class="navbar navbar-expand-lg navbar-dark header">
+          <div class="container">
+            <a class="navbar-brand" href="https://f450dbbc096c4b3aa713550b87e45c66.vfs.cloud9.ap-northeast-1.amazonaws.com/">
+              <span>余り物Cook</span>
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNavDropdown" style="">
+              <ul class="navbar-nav ml-auto text-right">
+                <% if admin_signed_in? %>
+                  <%= link_to admin_customers_path, class: "nav-link text-secondary" do %>
+                    <li class="fas fa-users"></li> ユーザー一覧
+                  <% end %>
+                  <%= link_to admin_genres_path, class: "nav-link text-secondary" do %>
+                    <li class="fas fa-link"></li> ジャンル一覧
+                  <% end %>
+                  <%= link_to admin_reviews_path, class: "nav-link text-secondary" do %>
+                    <i class="far fa-comment-dots" ></i> レビュー一覧
+                  <% end %>
+                  <%= link_to destroy_admin_session_path, {class: "nav-link text-dark", method: :delete} do %>
+                    <li class="fas fa-sign-out-alt"></li> ログアウト
+                  <% end %>
+                <% elsif customer_signed_in? %>
+                  <%= link_to root_path, class: "nav-link text-secondary" do %>
+                    <i class="fas fa-home" ></i> トップページ
+                  <% end %>
+                  <%= link_to public_my_page_path(), class: "nav-link text-secondary" do %>
+                    <i class="fas fa-user" ></i> マイページ
+                  <% end %>
+                  <%= link_to public_customer_memos_path(current_customer.id), class: "nav-link text-secondary" do %>
+                    <i class="fas fa-pencil-alt"></i> メモ
+                  <% end %>
+                  <%= link_to destroy_customer_session_path, {class: "nav-link text-secondary", method: :delete} do %>
+                    <i class="fas fa-sign-out-alt" ></i> ログアウト
+                  <% end %>
+                <% else %>
+                  <%= link_to root_path, class: "nav-link text-secondary" do %>
+                    <i class="fas fa-home" ></i> ホーム
+                  <% end %>
+                  <%= link_to public_about_path, class: "nav-link text-secondary" do %>
+                    <i class="fas fa-link" ></i> アバウト
+                  <% end %>
+                  <%= link_to new_customer_registration_path, class: "nav-link text-secondary" do %>
+                    <i class="fas fa-user-plus"></i> 新規登録
+                  <% end %>
+                  <%= link_to new_customer_session_path, class: "nav-link text-secondary" do %>
+                    <i class="fas  fa-sign-in-alt"></i> ログイン
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </body>
+  <%= yield %>
+  <footer class="bg-warning pt-2 pb-4">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="mx-auto">
+          <p>Copyright © AmarimonoCook All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>
