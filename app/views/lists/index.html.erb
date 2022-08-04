@@ -18,6 +18,8 @@
 
 <% @lists.each do |list| %>
 
+  <p>投稿ユーザー画像：<%= image_tag list.user.get_profile_image(100,100) %></p>
+
   <p>タイトル</p>
   <span>
     <%= link_to list.title, list_path(list.id) %>

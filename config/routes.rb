@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :users, only: [:show, :edit, :update]
+
   get 'chats/show'
   devise_for :users
   get 'top' => 'homes#top'
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
   get 'chat/:id', to: 'chats#show', as: 'chat'
   resources :chats, only: [:create]
 
-resources :conversations do
+  resources :conversations do
     resources :messages
   end
 
